@@ -2,6 +2,8 @@ import { createChatBotMessage } from 'react-chatbot-kit';
 import React from 'react';
 import LearningOptions from "./components/LearningOptions";
 import LinkList from "./components/LinkList";
+import ActionProvider from './ActionProvider';
+const data=ActionProvider.greet2();
 const config = { 
   botName: "LearningBot",
   initialMessages: [

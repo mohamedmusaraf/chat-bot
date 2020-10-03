@@ -24,25 +24,34 @@
   }
   
   export default ActionProvider;*/
-  import axios from 'axios';
-
+var data2;
   class ActionProvider {
+  
     constructor(createChatBotMessage, setStateFunc) {
       this.createChatBotMessage = createChatBotMessage;
       this.setState = setStateFunc;
     }
- 
-    async greet() {
+    
+    async greet(msg) {
         //const res=null;
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({type:"Search", value: "appointment"})
+          body: JSON.stringify({type:"Search", value: msg})
       };
         const response = await fetch('https://4pjz1fqnp5.execute-api.ap-south-1.amazonaws.com/POC/SecurraAssistAutoCompleteFAQFulfilment', requestOptions);
         const data = await response.json();
-        const greetingMessage = this.createChatBotMessage("HI Musaraf")
+        data2=data;
+       // console.log(data)
+        this.greet2();
+        const greetingMessage = this.createChatBotMessage(data.responseMessage[0].answer)
         this.updateChatbotState(greetingMessage)
+
+    }
+    greet2()
+    {
+      console.log(data2);
+      return data2;
     }
     
     updateChatbotState(message) {
